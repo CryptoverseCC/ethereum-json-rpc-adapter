@@ -10,8 +10,8 @@ class ParitySetModuleParityApi(retrofit: Retrofit) : ParityApi.ParitySetModule {
 
     private val parityGenericApi by lazy { retrofit.create(ParityGenericApi.SetModule::class.java) }
 
-    override fun addReservedPeer(enode: List<String>): Single<Unit> {
-        return parityGenericApi.addReservedPeer(ParityGenericApi.Request(method = "parity_addReservedPeer", params = enode))
+    override fun addReservedPeer(enode: String): Single<Unit> {
+        return parityGenericApi.addReservedPeer(ParityGenericApi.Request(method = "parity_addReservedPeer", params = listOf(enode)))
                 .unwrap()
     }
 }

@@ -18,7 +18,7 @@ interface ParityApi {
     }
 
     interface ParitySetModule {
-        fun addReservedPeer(enode: List<String>): Single<Unit>
+        fun addReservedPeer(enode: String): Single<Unit>
     }
 
     data class TransactionReceiptResult(
