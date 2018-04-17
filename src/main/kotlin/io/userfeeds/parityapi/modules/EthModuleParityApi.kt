@@ -4,7 +4,7 @@ import io.reactivex.Single
 import io.userfeeds.parityapi.*
 import retrofit2.Retrofit
 
-class EthParityApi(retrofit: Retrofit) : ParityApi.EthModule {
+class EthModuleParityApi(retrofit: Retrofit) : ParityApi.EthModule {
 
     private val parityGenericApi by lazy { retrofit.create(ParityGenericApi.EthModule::class.java) }
 
