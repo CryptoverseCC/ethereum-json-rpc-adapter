@@ -8,8 +8,8 @@ class ParityModuleParityApi(retrofit: Retrofit) : ParityApi.ParityModule {
 
     private val parityGenericApi by lazy { retrofit.create(ParityGenericApi.ParityModule::class.java) }
 
-    override fun getBlockHeaderByNumber(block: Block): Single<ParityApi.BlockHeaderResult> {
-        return parityGenericApi.getBlockHeaderByNumber(ParityGenericApi.Request(method = "parity_getBlockHeaderByNumber", params = listOf(block.numberHex)))
+    override fun getBlockHeaderByNumber(blockNumber: Long): Single<ParityApi.BlockHeaderResult> {
+        return parityGenericApi.getBlockHeaderByNumber(ParityGenericApi.Request(method = "parity_getBlockHeaderByNumber", params = listOf(blockNumber.longToHex())))
                 .unwrap()
     }
 

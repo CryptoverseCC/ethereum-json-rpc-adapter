@@ -28,20 +28,20 @@ class EthModuleParityApi(retrofit: Retrofit) : ParityApi.EthModule {
                 .unwrap()
     }
 
-    override fun getBlockTrace(block: Block): Single<List<ParityApi.Trace>> {
+    override fun getBlockTrace(blockNumber: Long): Single<List<ParityApi.Trace>> {
         return parityGenericApi.getBlockTrace(ParityGenericApi.Request(
                 method = "trace_block",
-                params = listOf(block.numberHex)))
+                params = listOf(blockNumber.longToHex())))
                 .unwrap()
     }
 
-    override fun getLogs(block: Block): Single<List<ParityApi.Log>> {
+    override fun getLogs(fromBlock: Long, toBlock: Long): Single<List<ParityApi.Log>> {
         return parityGenericApi.getLogs(ParityGenericApi.Request(
                 method = "eth_getLogs",
                 params = listOf(
                         ParityApi.LogsParams(
-                                fromBlock = block.numberHex,
-                                toBlock = block.numberHex
+                                fromBlock = fromBlock.longToHex(),
+                                toBlock = toBlock.longToHex()
                         )
                 )))
                 .unwrap()

@@ -7,13 +7,13 @@ interface ParityApi {
         fun getBlockNumber(): Single<String>
         fun getBlockByNumber(number: Long): Single<EthereumBlock>
         fun getBlockByHash(hash: String): Single<BlockByHashResult>
-        fun getBlockTrace(block: Block): Single<List<Trace>>
-        fun getLogs(block: Block): Single<List<Log>>
+        fun getBlockTrace(blockNumber: Long): Single<List<Trace>>
+        fun getLogs(fromBlock: Long, toBlock: Long): Single<List<Log>>
         fun getTransactionReceipt(transactionHash: String): Single<TransactionReceiptResult>
     }
 
     interface ParityModule {
-        fun getBlockHeaderByNumber(block: Block): Single<BlockHeaderResult>
+        fun getBlockHeaderByNumber(blockNumber: Long): Single<BlockHeaderResult>
         fun getEnode(): Single<String>
     }
 
@@ -72,5 +72,3 @@ interface ParityApi {
             val timestamp: String
     )
 }
-
-typealias Block = Pair<Long, String>
