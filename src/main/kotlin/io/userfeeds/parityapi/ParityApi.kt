@@ -4,7 +4,7 @@ import io.reactivex.Single
 
 interface ParityApi {
     interface EthModule {
-        fun getBlockNumber(): Single<Long>
+        fun getBlockNumber(): Single<String>
         fun getBlockByNumber(number: Long): Single<EthereumBlock>
         fun getBlockByHash(hash: String): Single<BlockByHashResult>
         fun getBlockTrace(block: Block): Single<List<Trace>>
@@ -74,7 +74,3 @@ interface ParityApi {
 }
 
 typealias Block = Pair<Long, String>
-
-fun String.hexToLong() = removePrefix("0x").toLong(16)
-
-val Block.numberHex: String get() = "0x${first.toString(16)}"

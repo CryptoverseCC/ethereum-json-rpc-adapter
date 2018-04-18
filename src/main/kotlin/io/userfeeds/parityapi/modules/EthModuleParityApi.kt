@@ -8,17 +8,16 @@ class EthModuleParityApi(retrofit: Retrofit) : ParityApi.EthModule {
 
     private val parityGenericApi by lazy { retrofit.create(ParityGenericApi.EthModule::class.java) }
 
-    override fun getBlockNumber(): Single<Long> {
+    override fun getBlockNumber(): Single<String> {
         return parityGenericApi.getBlockNumber(ParityGenericApi.Request(method = "eth_blockNumber"))
                 .unwrap()
-                .map { it.hexToLong() }
     }
 
     override fun getBlockByNumber(number: Long): Single<ParityApi.EthereumBlock> {
         return parityGenericApi.getBlockByNumber(
                 ParityGenericApi.Request(
                         method = "eth_getBlockByNumber",
-                        params = listOf("0x${number.toString(16)}", false)))
+                        params = listOf(number.longToHex(), false)))
                 .unwrap()
     }
 
@@ -56,5 +55,3 @@ class EthModuleParityApi(retrofit: Retrofit) : ParityApi.EthModule {
                 .unwrap()
     }
 }
-
-
