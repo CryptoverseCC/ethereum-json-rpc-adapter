@@ -56,12 +56,12 @@ internal interface ParityGenericApi {
     data class Error(val message: String)
 }
 
-internal inline fun <reified T> Single<ParityGenericApi.Response<T>>.unwrap(): Single<T> =
-        flatMap {
+internal fun <T> Single<ParityGenericApi.Response<T>>.unwrap(): Single<T> =
+        map {
             if (it.error == null) {
-                Single.just(it.result)
+                it.result!!
             } else {
-                Single.error<T>(RuntimeException(it.error.message))
+                throw RuntimeException(it.error.message)
             }
         }
 
