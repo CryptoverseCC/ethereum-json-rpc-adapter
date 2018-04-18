@@ -35,10 +35,10 @@ internal interface ParityGenericApi {
         fun getEnode(@Body request: Request): Single<Response<String>>
     }
 
-    interface SetModule {
+    interface ParitySetModule {
 
         @POST("/")
-        fun addReservedPeer(@Body request: Request): Single<Response<Unit>>
+        fun addReservedPeer(@Body request: Request): Single<Response<Boolean>>
     }
 
     data class Request(
