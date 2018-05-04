@@ -5,26 +5,26 @@ import io.userfeeds.parityapi.ParityApi
 import io.userfeeds.parityapi.ParityGenericApi
 import io.userfeeds.parityapi.longToHex
 import io.userfeeds.parityapi.unwrap
-import retrofit2.Retrofit
 
-class ParityModuleParityApi(retrofit: Retrofit) : ParityApi.ParityModule {
-
-    private val parityGenericApi by lazy { retrofit.create(ParityGenericApi.ParityModule::class.java) }
+internal class LocalizedParityModule(
+        private val baseUrl: String,
+        private val parityModule: ParityGenericApi.ParityModule
+) : ParityApi.ParityModule {
 
     override fun getBlockHeaderByNumber(blockNumber: Long): Single<ParityApi.BlockHeaderResult> {
-        return parityGenericApi.getBlockHeaderByNumber(
+        return parityModule.getBlockHeaderByNumber(
                 ParityGenericApi.Request(
                         method = "parity_getBlockHeaderByNumber",
                         params = listOf(blockNumber.longToHex())
-                ))
+                ), baseUrl)
                 .unwrap()
     }
 
     override fun getEnode(): Single<String> {
-        return parityGenericApi.getEnode(
+        return parityModule.getEnode(
                 ParityGenericApi.Request(
                         method = "parity_enode"
-                ))
+                ), baseUrl)
                 .unwrap()
     }
 }
