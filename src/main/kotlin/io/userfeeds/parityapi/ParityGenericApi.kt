@@ -3,42 +3,43 @@ package io.userfeeds.parityapi
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Url
 import java.util.*
 
 internal interface ParityGenericApi {
 
     interface EthModule {
-        @POST("/")
-        fun getBlockNumber(@Body request: Request): Single<Response<String>>
+        @POST
+        fun getBlockNumber(@Body request: Request, @Url baseUrl: String): Single<Response<String>>
 
-        @POST("/")
-        fun getBlockByNumber(@Body request: Request): Single<Response<ParityApi.EthereumBlock>>
+        @POST
+        fun getBlockByNumber(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.EthereumBlock>>
 
-        @POST("/")
-        fun getBlockByHash(@Body request: Request): Single<Response<ParityApi.BlockByHashResult>>
+        @POST
+        fun getBlockByHash(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.BlockByHashResult>>
 
-        @POST("/")
-        fun getBlockTrace(@Body request: Request): Single<Response<List<ParityApi.Trace>>>
+        @POST
+        fun getBlockTrace(@Body request: Request, @Url baseUrl: String): Single<Response<List<ParityApi.Trace>>>
 
-        @POST("/")
-        fun getLogs(@Body request: Request): Single<Response<List<ParityApi.Log>>>
+        @POST
+        fun getLogs(@Body request: Request, @Url baseUrl: String): Single<Response<List<ParityApi.Log>>>
 
-        @POST("/")
-        fun getTransactionReceipt(@Body request: Request): Single<Response<ParityApi.TransactionReceiptResult>>
+        @POST
+        fun getTransactionReceipt(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.TransactionReceiptResult>>
     }
 
     interface ParityModule {
-        @POST("/")
-        fun getBlockHeaderByNumber(@Body request: Request): Single<Response<ParityApi.BlockHeaderResult>>
+        @POST
+        fun getBlockHeaderByNumber(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.BlockHeaderResult>>
 
-        @POST("/")
-        fun getEnode(@Body request: Request): Single<Response<String>>
+        @POST
+        fun getEnode(@Body request: Request, @Url baseUrl: String): Single<Response<String>>
     }
 
     interface ParitySetModule {
 
-        @POST("/")
-        fun addReservedPeer(@Body request: Request): Single<Response<Boolean>>
+        @POST
+        fun addReservedPeer(@Body request: Request, @Url baseUrl: String): Single<Response<Boolean>>
     }
 
     data class Request(
