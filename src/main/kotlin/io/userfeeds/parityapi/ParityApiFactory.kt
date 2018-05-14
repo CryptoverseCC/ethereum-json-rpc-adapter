@@ -21,23 +21,26 @@ interface ParityApiFactory {
 class ParityApiFactoryImpl : ParityApiFactory {
 
     private val retrofit: Retrofit
+    private val parityModule: ParityGenericApi.ParityModule
+    private val parityEthModule: ParityGenericApi.EthModule
+    private val paritySetModule: ParityGenericApi.ParitySetModule
 
     constructor() {
         retrofit = createDefaultBuilder()
                 .build()
+        parityEthModule = retrofit.create(ParityGenericApi.EthModule::class.java)
+        parityModule = retrofit.create(ParityGenericApi.ParityModule::class.java)
+        paritySetModule = retrofit.create(ParityGenericApi.ParitySetModule::class.java)
     }
 
     constructor(customizeRetrofit: Retrofit.Builder.() -> Retrofit.Builder) {
         retrofit = createDefaultBuilder()
                 .customizeRetrofit()
                 .build()
+        parityEthModule = retrofit.create(ParityGenericApi.EthModule::class.java)
+        parityModule = retrofit.create(ParityGenericApi.ParityModule::class.java)
+        paritySetModule = retrofit.create(ParityGenericApi.ParitySetModule::class.java)
     }
-
-    private fun retrofitParityModule() = retrofit.create(ParityGenericApi.ParityModule::class.java)
-
-    private fun retrofitEthModule() = retrofit.create(ParityGenericApi.EthModule::class.java)
-
-    private fun retrofitParitySetModule() = retrofit.create(ParityGenericApi.ParitySetModule::class.java)
 
     private fun createDefaultBuilder(): Retrofit.Builder {
         return Retrofit.Builder()
@@ -48,14 +51,14 @@ class ParityApiFactoryImpl : ParityApiFactory {
     }
 
     override fun createEthModuleApi(parityAddress: String?): ParityApi.EthModule =
-            LocalizedEthModule(parityAddress ?: retrofit.baseUrl().toString(), retrofitEthModule())
+            LocalizedEthModule(parityAddress ?: retrofit.baseUrl().toString(), parityEthModule)
 
     override fun createParitySetModuleApi(parityAddress: String?): ParityApi.ParitySetModule {
-        return LocalizedParitySetModule(parityAddress ?: retrofit.baseUrl().toString(), retrofitParitySetModule())
+        return LocalizedParitySetModule(parityAddress ?: retrofit.baseUrl().toString(), paritySetModule)
     }
 
     override fun createParityModuleApi(parityAddress: String?): ParityApi.ParityModule {
-        return LocalizedParityModule(parityAddress ?: retrofit.baseUrl().toString(), retrofitParityModule())
+        return LocalizedParityModule(parityAddress ?: retrofit.baseUrl().toString(), parityModule)
     }
 
     override fun createComposedApi(parityAddress: String?): ParityComposedApi {
