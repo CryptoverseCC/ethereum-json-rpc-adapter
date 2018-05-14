@@ -34,6 +34,9 @@ internal interface ParityGenericApi {
 
         @POST
         fun getEnode(@Body request: Request, @Url baseUrl: String): Single<Response<String>>
+
+        @POST
+        fun getNetPeers(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.PeersInfo>>
     }
 
     interface ParitySetModule {

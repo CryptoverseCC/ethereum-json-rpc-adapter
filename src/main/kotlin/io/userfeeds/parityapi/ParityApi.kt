@@ -15,6 +15,7 @@ interface ParityApi {
     interface ParityModule {
         fun getBlockHeaderByNumber(blockNumber: Long): Single<BlockHeaderResult>
         fun getEnode(): Single<String>
+        fun getNetPeers(): Single<PeersInfo>
     }
 
     interface ParitySetModule {
@@ -71,4 +72,19 @@ interface ParityApi {
     data class BlockHeaderResult(
             val timestamp: String
     )
+
+    data class PeersInfo(
+            val active: Int,
+            val connected: Int,
+            val max: Int,
+            val peers: List<PeerInfo>)
+
+    data class PeerInfo(
+            val id: String,
+            val name: String,
+            val network: NetworkInfo)
+
+    data class NetworkInfo(
+            val localAddress: String,
+            val remoteAddress: String)
 }

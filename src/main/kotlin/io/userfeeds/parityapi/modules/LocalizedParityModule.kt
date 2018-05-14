@@ -27,4 +27,12 @@ internal class LocalizedParityModule(
                 ), baseUrl)
                 .unwrap()
     }
+
+    override fun getNetPeers(): Single<ParityApi.PeersInfo> {
+        return parityModule.getNetPeers(
+                ParityGenericApi.Request(
+                        method = "parity_netPeers"
+                ), baseUrl)
+                .unwrap()
+    }
 }
