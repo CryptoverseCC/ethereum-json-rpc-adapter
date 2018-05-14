@@ -41,6 +41,7 @@ class ParityApiFactoryImpl : ParityApiFactory {
 
     private fun createDefaultBuilder(): Retrofit.Builder {
         return Retrofit.Builder()
+                .baseUrl("http://localhost:8545")
                 .client(OkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create())
