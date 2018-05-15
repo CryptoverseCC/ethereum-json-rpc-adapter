@@ -45,6 +45,7 @@ interface ParityApi {
             val number: String,
             val hash: String,
             val parentHash: String,
+            val timestamp: String,
             val transactions: List<String>
     )
 
@@ -52,6 +53,7 @@ interface ParityApi {
             val number: String,
             val hash: String,
             val parentHash: String,
+            val timestamp: String,
             val transactions: List<Transaction>
     )
 
