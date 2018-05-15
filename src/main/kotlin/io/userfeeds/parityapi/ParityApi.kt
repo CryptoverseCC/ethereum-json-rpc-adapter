@@ -6,7 +6,9 @@ interface ParityApi {
     interface EthModule {
         fun getBlockNumber(): Single<String>
         fun getBlockByNumber(number: Long): Single<EthereumBlock>
-        fun getBlockByHash(hash: String): Single<BlockByHashResult>
+        fun getFullBlockByNumber(number: Long): Single<FullEthereumBlock>
+        fun getBlockByHash(hash: String): Single<EthereumBlock>
+        fun getFullBlockByHash(hash: String): Single<FullEthereumBlock>
         fun getBlockTrace(blockNumber: Long): Single<List<Trace>>
         fun getLogs(fromBlock: Long, toBlock: Long): Single<List<Log>>
         fun getTransactionReceipt(transactionHash: String): Single<TransactionReceiptResult>
@@ -38,14 +40,25 @@ interface ParityApi {
             val transactionHash: String
     )
 
-    data class BlockByHashResult(
-            val transactions: List<Any>
-    )
-
     data class EthereumBlock(
             val number: String,
             val hash: String,
-            val parentHash: String
+            val parentHash: String,
+            val transactions: List<String>
+    )
+
+    data class FullEthereumBlock(
+            val number: String,
+            val hash: String,
+            val parentHash: String,
+            val transactions: List<Transaction>
+    )
+
+    data class Transaction(
+            val from: String,
+            val hash: String,
+            val to: String,
+            val value: String
     )
 
     data class Trace(

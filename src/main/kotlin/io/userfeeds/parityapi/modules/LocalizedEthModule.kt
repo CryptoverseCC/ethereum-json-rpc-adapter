@@ -22,10 +22,25 @@ internal class LocalizedEthModule constructor(
                 .unwrap()
     }
 
-    override fun getBlockByHash(hash: String): Single<ParityApi.BlockByHashResult> {
+    override fun getFullBlockByNumber(number: Long): Single<ParityApi.FullEthereumBlock> {
+        return parityGenericEthModule.getFullBlockByNumber(
+                ParityGenericApi.Request(
+                        method = "eth_getBlockByNumber",
+                        params = listOf(number.longToHex(), true)), baseUrl)
+                .unwrap()
+    }
+
+    override fun getBlockByHash(hash: String): Single<ParityApi.EthereumBlock> {
         return parityGenericEthModule.getBlockByHash(ParityGenericApi.Request(
                 method = "eth_getBlockByHash",
                 params = listOf(hash, false)), baseUrl)
+                .unwrap()
+    }
+
+    override fun getFullBlockByHash(hash: String): Single<ParityApi.FullEthereumBlock> {
+        return parityGenericEthModule.getFullBlockByHash(ParityGenericApi.Request(
+                method = "eth_getBlockByHash",
+                params = listOf(hash, true)), baseUrl)
                 .unwrap()
     }
 

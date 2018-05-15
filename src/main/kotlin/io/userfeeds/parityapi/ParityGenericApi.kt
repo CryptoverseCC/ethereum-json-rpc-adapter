@@ -16,7 +16,13 @@ internal interface ParityGenericApi {
         fun getBlockByNumber(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.EthereumBlock>>
 
         @POST
-        fun getBlockByHash(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.BlockByHashResult>>
+        fun getFullBlockByNumber(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.FullEthereumBlock>>
+
+        @POST
+        fun getBlockByHash(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.EthereumBlock>>
+
+        @POST
+        fun getFullBlockByHash(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.FullEthereumBlock>>
 
         @POST
         fun getBlockTrace(@Body request: Request, @Url baseUrl: String): Single<Response<List<ParityApi.Trace>>>
