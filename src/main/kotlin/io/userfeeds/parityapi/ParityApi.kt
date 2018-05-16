@@ -60,7 +60,7 @@ interface ParityApi {
     data class Transaction(
             val from: String,
             val hash: String,
-            val to: String,
+            val to: String?,
             val value: String
     )
 
