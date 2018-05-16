@@ -25,7 +25,8 @@ interface ParityApi {
     }
 
     data class TransactionReceiptResult(
-            val logs: List<Any>
+            val status: String,
+            val logs: List<Log>
     )
 
     data class LogsParams(
