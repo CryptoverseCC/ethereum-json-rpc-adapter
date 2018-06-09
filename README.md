@@ -1,4 +1,4 @@
-# parity-json-rpc-adapter
+# ethereum-json-rpc-adapter
 
 Add it in your root build.gradle at the end of repositories:
 ```
@@ -14,7 +14,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.Userfeeds:parity-json-rpc-adapter:-SNAPSHOT'
+  compile 'com.github.Userfeeds:ethereum-json-rpc-adapter:-SNAPSHOT'
 }
 ```
   
