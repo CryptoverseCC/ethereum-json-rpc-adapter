@@ -6,6 +6,6 @@ class ParityApiFactoryImplTest {
 
     @Test
     fun shouldCreateInstanceOfParityApi() {
-        ParityApiFactoryImpl().createComposedApi()
+        ParityApiFactoryImpl().createComposedApi().getPeerCount().blockingGet().let { print(it) }
     }
 }

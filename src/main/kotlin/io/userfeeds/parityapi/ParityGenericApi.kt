@@ -51,6 +51,11 @@ internal interface ParityGenericApi {
         fun addReservedPeer(@Body request: Request, @Url baseUrl: String): Single<Response<Boolean>>
     }
 
+    interface NetModule {
+        @POST
+        fun getNetPeers(@Body request: Request, @Url baseUrl: String): Single<Response<String>>
+    }
+
     data class Request(
             val id: String = UUID.randomUUID().toString(),
             val jsonrpc: String = "2.0",

@@ -20,6 +20,10 @@ interface ParityApi {
         fun getNetPeers(): Single<PeersInfo>
     }
 
+    interface NetModule {
+        fun getPeerCount() : Single<Long>
+    }
+
     interface ParitySetModule {
         fun addReservedPeer(enode: String): Single<Boolean>
     }

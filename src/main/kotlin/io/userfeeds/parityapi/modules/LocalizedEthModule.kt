@@ -4,7 +4,7 @@ import io.reactivex.Single
 import io.userfeeds.parityapi.*
 import retrofit2.Retrofit
 
-internal class LocalizedEthModule constructor(
+internal class LocalizedEthModule(
         private val baseUrl: String,
         private val parityGenericEthModule: ParityGenericApi.EthModule
 ) : ParityApi.EthModule {
