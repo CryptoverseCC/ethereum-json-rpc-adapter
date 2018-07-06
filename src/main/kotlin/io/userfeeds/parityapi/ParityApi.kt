@@ -21,7 +21,7 @@ interface ParityApi {
     }
 
     interface NetModule {
-        fun getPeerCount() : Single<Long>
+        fun getPeerCount() : Single<String>
     }
 
     interface ParitySetModule {
