@@ -32,6 +32,9 @@ internal interface ParityGenericApi {
 
         @POST
         fun getTransactionReceipt(@Body request: Request, @Url baseUrl: String): Single<Response<ParityApi.TransactionReceiptResult>>
+
+        @POST
+        fun call(@Body request: Request, @Url baseUrl: String): Single<Response<String>>
     }
 
     interface ParityModule {

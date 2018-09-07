@@ -12,6 +12,7 @@ interface ParityApi {
         fun getBlockTrace(blockNumber: Long): Single<List<Trace>>
         fun getLogs(fromBlock: Long, toBlock: Long): Single<List<Log>>
         fun getTransactionReceipt(transactionHash: String): Single<TransactionReceiptResult>
+        fun call(to: String, data: String): Single<String>
     }
 
     interface ParityModule {

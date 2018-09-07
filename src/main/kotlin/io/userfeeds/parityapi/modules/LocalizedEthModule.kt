@@ -1,8 +1,10 @@
 package io.userfeeds.parityapi.modules
 
 import io.reactivex.Single
-import io.userfeeds.parityapi.*
-import retrofit2.Retrofit
+import io.userfeeds.parityapi.ParityApi
+import io.userfeeds.parityapi.ParityGenericApi
+import io.userfeeds.parityapi.longToHex
+import io.userfeeds.parityapi.unwrap
 
 internal class LocalizedEthModule(
         private val baseUrl: String,
@@ -67,7 +69,17 @@ internal class LocalizedEthModule(
         return parityGenericEthModule.getTransactionReceipt(
                 ParityGenericApi.Request(
                         method = "eth_getTransactionReceipt",
-                        params = listOf(transactionHash)), baseUrl)
+                        params = listOf(transactionHash)
+                ), baseUrl)
+                .unwrap()
+    }
+
+    override fun call(to: String, data: String): Single<String> {
+        return parityGenericEthModule.call(
+                ParityGenericApi.Request(
+                        method = "eth_call",
+                        params = listOf(mapOf("to" to to, "data" to data))
+                ), baseUrl)
                 .unwrap()
     }
 }
